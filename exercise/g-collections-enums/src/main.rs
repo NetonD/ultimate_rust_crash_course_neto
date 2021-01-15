@@ -27,9 +27,8 @@ impl Shot {
         match self {
             Shot::Bullseye => 5,
             Shot::Hit(x) if x < 3.0 => 2,
-            Shot::Hit(x) if x >= 3.0 => 1,
+            Shot::Hit(x)  => 1,
             Shot::Miss => 0,
-            Shot::Hit(_) => -1
         }
     }
 }
@@ -60,11 +59,7 @@ fn main() {
     let mut total = 0;
     // 3. Finally, loop through each shot in shots and add its points to total
     for i in shots{
-        match i {
-            Shot::Hit(x) => total += x as i32,
-            Shot::Bullseye => total += 5,
-            Shot::Miss => total += 0
-        }
+       total += i.points();
     }
 
     println!("Final point total is: {}", total);
